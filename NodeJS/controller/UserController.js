@@ -24,7 +24,7 @@ const addUser = (req,res) => {
     const user = new userSchema(req.body);
     //save user data
     user.save().then((data) => {
-        req.status(201).json({
+        res.status(201).json({
             message: "Data has been saved",
             success: true,
             data: data

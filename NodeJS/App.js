@@ -19,5 +19,5 @@ mongoose.connect("mongodb://127.0.0.1:27017/ExpenseManager", {
 })
 
 app.listen(PORT, () => {
-    console.log("server started on port 3002...");
+    console.log("server started on port ${PORT}...");
   });
