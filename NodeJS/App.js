@@ -10,8 +10,8 @@ const userRoutes = require("./routes/UserRoutes");
 app.use('/user', userRoutes);
 
 mongoose.connect("mongodb://127.0.0.1:27017/ExpenseManager", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
 }).then(()=>{
     console.log("Database Connected Successfully...");
 }).catch((err)=>{
@@ -19,5 +19,5 @@ mongoose.connect("mongodb://127.0.0.1:27017/ExpenseManager", {
 })
 
 app.listen(PORT, () => {
-    console.log("server started on port ${PORT}...");
+    console.log("server started on port 3002...");
   });

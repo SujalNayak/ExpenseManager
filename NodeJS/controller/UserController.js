@@ -1,6 +1,4 @@
 const userSchema = require("../model/UserModel");
-const express = require("express");
-const mongoose = require("mongoose");
 
 const getUsers = (req,res) => {
 
@@ -38,9 +36,66 @@ const addUser = (req,res) => {
     })
 }
 
+// const updateUser = (req,res) => {
+
+//     const id = parseInt(req.params.id);
+//     const userIndex = userSchema.findIndex(userSchema => userSchema.id === id);
+
+//     if(userIndex === -1){
+//         return res.status(400).json({message:'Invalid User ID'});
+//     }
+//     const updatedUser = req.body;
+//     userSchema[userIndex] = updatedUser;
+    
+//     return res.status(200).json(userSchema[userIndex]);
+// }
+
+//update user
+function updateUser(req,res){
+    const id=parseInt(req.params.id);
+    const updateInfo=req.body;
+    const foundUser=userSchema.find(user=>user.id===id)
+    if(!foundUser){
+        return res.status(400).send("The user with the given ID was not found.")
+        }
+        let flag=false
+        for(const key in updateInfo){
+            if(updateInfo[key]!==""){
+                flag=true
+                foundUser[key]=updateInfo[key]
+                }
+                }
+            if (!flag)
+            {
+                return res.status(600).send('At least one property must be changed')
+            }
+    return users.save().then(()=>{
+        res.send(foundUser)
+        }).catch((e)=>{
+            console.log(e)
+        })
+}
+
+//delete user
+const removeUser = (req,res)=>{
+    const id=parseInt(req.params.id);
+    const userIndex = userSchema.findIndex(user=>user.id===id);
+    if(userIndex===-1){
+        return res.status(400).json({
+            message:"No user with the given ID was found."
+        })
+    }
+    const removedUser = userSchema[userIndex];
+    userSchema.splice(userIndex,1);
+    res.status(200).json({removedUser});
+}
+
+
 //export
 module.exports=
 {
     addUser,
-    getUsers
+    getUsers,
+    updateUser,
+    removeUser
 };
