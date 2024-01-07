@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const getUsers = (req,res) => {
-    // Get all users from the database and send them back to the client
+
     console.log(userSchema);
     userSchema.find().then((data)=>{
         res.status(200).json({
