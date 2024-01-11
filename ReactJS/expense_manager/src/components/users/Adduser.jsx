@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-export const AddBook = () => {
+export const AddUser = () => {
   const { register, handleSubmit} = useForm();
   const submitHandler = async(data) => {
 
@@ -47,9 +47,20 @@ export const AddBook = () => {
             <input type="email" {...register("email")}/>
           </div>
           <div>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password: </label>
             <input type="password" {...register("password")}/>
           </div>
+          <div>
+            <label htmlFor="mobile_no">Mobile No: </label>
+            <input type="number" {...register("mobile_no")}/>
+          </div>
+          <div>
+            <label htmlFor="Status">Status: </label>
+            <select {...register("status")}>
+              <option>Active</option>
+              <option>Inactive</option>
+            </select>
+            </div>
           <div>
             <input type="submit" value="Save User" />
           </div>
