@@ -79,7 +79,7 @@ function updateUser(req,res){
 //delete user
 const removeUser = (req,res)=>{
     const id=parseInt(req.params.id);
-    const userIndex = userSchema.findById(user=>user.id===id);
+    const userIndex = userSchema.find(user=>user.id===id);
     if(userIndex===-1){
         return res.status(400).json({
             message:"No user with the given ID was found."
