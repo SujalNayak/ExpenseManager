@@ -57,18 +57,18 @@ function updateUser(req,res){
     const foundUser=userSchema.find(user=>user.id===id)
     if(!foundUser){
         return res.status(400).send("The user with the given ID was not found.")
-        }
-        let flag=false
-        for(const key in updateInfo){
-            if(updateInfo[key]!==""){
-                flag=true
-                foundUser[key]=updateInfo[key]
-                }
-                }
-            if (!flag)
-            {
-                return res.status(600).send('At least one property must be changed')
+    }
+    let flag=false
+    for(const key in updateInfo){
+        if(updateInfo[key]!==""){
+            flag=true
+            foundUser[key]=updateInfo[key]
             }
+    }
+    if (!flag)
+    {
+        return res.status(600).send('At least one property must be changed')
+    }
     return users.save().then(()=>{
         res.send(foundUser)
         }).catch((e)=>{
@@ -79,7 +79,7 @@ function updateUser(req,res){
 //delete user
 const removeUser = (req,res)=>{
     const id=parseInt(req.params.id);
-    const userIndex = userSchema.findIndex(user=>user.id===id);
+    const userIndex = userSchema.findById(user=>user.id===id);
     if(userIndex===-1){
         return res.status(400).json({
             message:"No user with the given ID was found."
