@@ -15,7 +15,7 @@ export const AddUser = () => {
     formData.append("mobile_no", data.mobile_no);
     formData.append("status", data.status);
     
-    const res = await axios.post("http://localhost:3002/user/user", formData)
+    const res = await axios.post("http://localhost:3002/user/user", data)
     console.log(res.data);
     
   };
