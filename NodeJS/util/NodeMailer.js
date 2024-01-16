@@ -100,7 +100,7 @@ const sendMail = async (to, subject,text, html) => {
     return res;
 }
 
-sendMail("patelx268@gmail.com", "Test Mail", "This is test mail from nodejs")
-// module.exports=sendMail;
+// sendMail("tirthpatel4822@gmail.com", "Test Mail", "This is test mail from nodejs")
+module.exports=sendMail;
 
 {/* <p class="footer-text">This is a sample transaction. Please verify the details before proceeding.</p> */}

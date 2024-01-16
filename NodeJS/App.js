@@ -8,6 +8,8 @@ app.use(express.json());
 
 const userRoutes = require("./routes/UserRoutes");
 app.use('/user', userRoutes);
+const expenseRoutes = require("./routes/ExpenseRoutes");
+app.use('/expense', expenseRoutes);
 
 mongoose.connect("mongodb://127.0.0.1:27017/ExpenseManager", {
   // useNewUrlParser: true,
