@@ -1,6 +1,8 @@
 const userSchema = require("../model/UserModel");
 const mailer = require("../util/NodeMailer")
 const multer = require("multer");
+const password = require("../util/PaswordUtil");
+const tokenutil = require("../util/TokenUtil");
 
   
 
@@ -43,6 +45,40 @@ const addUser = (req,res) => {
         console.log(err);   
     })
 };
+
+
+const addUserWithEncryption = async(req,res) => {
+    const userObj = {
+        id:req.body.id,
+        fname:req.body.fname,
+        lname:req.body.lname,
+        email:req.body.email,
+        password:await password.encryptPassword(req.body.password),
+        mobile_no:req.body.mobile_no,
+        status:req.body.status,
+    }
+    const user = new userSchema(userObj);
+    var token = tokenutil.generateToken(userObj);
+    user.save().then((data) => {
+        res.status(201).json({
+            message: "Data has been saved",
+            success: true,
+            data: data
+        }),
+        mailer.sendMail(req.body.email,"This is the Mail from Sujal Nayak","This is test mail from nodejs").then((data)=>{
+            console.log(data);
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }).catch((err) => {
+        res.status(500).json({
+            message: "error",
+            error: err
+        })
+        console.log(err);   
+    })
+}
+
 // const updateUser = (req,res) => {
 
 //     const id = parseInt(req.params.id);
@@ -58,43 +94,40 @@ const addUser = (req,res) => {
 // }
 
 //update user
-function updateUser(req,res){
-    const id=parseInt(req.params.id);
-    const updateInfo=req.body;
-    const foundUser=userSchema.find(user=>user.id===id)
-    if(!foundUser){
-        return res.status(400).send("The user with the given ID was not found.")
-    }
-    let flag=false
-    for(const key in updateInfo){
-        if(updateInfo[key]!==""){
-            flag=true
-            foundUser[key]=updateInfo[key]
-            }
-    }
-    if (!flag)
-    {
-        return res.status(600).send('At least one property must be changed')
-    }
-    return users.save().then(()=>{
-        res.send(foundUser)
-        }).catch((e)=>{
-            console.log(e)
+const updateUser = (req,res) => {
+
+    const id = req.params.id;
+    const user = req.body;
+    userSchema.findByIdAndUpdate(id,user).then((data)=>{
+        res.status(200).json({
+            message:"success",
+            success:true,
+            data:data
         })
+    }).catch((err)=>{
+        res.status(500).json({
+            message:"error",
+            error:err
+        })
+    })
 }
 
 //delete user
-const removeUser = (req,res)=>{
-    const id=parseInt(req.params.id);
-    const userIndex = userSchema.find(user=>user.id===id);
-    if(userIndex===-1){
-        return res.status(400).json({
-            message:"No user with the given ID was found."
+const removeUser = (req,res) => {
+
+    const id = req.params.id;
+    userSchema.findByIdAndDelete(id).then((data)=>{
+        res.status(200).json({
+            message:"success",
+            success:true,
+            data:data
         })
-    }
-    const removedUser = userSchema[userIndex];
-    userSchema.splice(userIndex,1);
-    res.status(200).json({removedUser});
+    }).catch((err)=>{
+        res.status(500).json({
+            message:"error",
+            error:err
+        })
+    })
 }
 
 
@@ -105,5 +138,6 @@ module.exports=
     addUser,
     getUsers,
     updateUser,
-    removeUser
+    removeUser,
+    addUserWithEncryption
 };
