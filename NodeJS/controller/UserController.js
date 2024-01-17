@@ -65,7 +65,7 @@ const addUserWithEncryption = async(req,res) => {
             success: true,
             data: data
         }),
-        mailer.sendMail(req.body.email,"This is the Mail from Sujal Nayak","This is test mail from nodejs").then((data)=>{
+        mailer.sendMail(req.body.email,req.body.fname,"This is the Mail from Sujal Nayak","This is test mail from nodejs").then((data)=>{
             console.log(data);
         }).catch((err)=>{
             console.log(err);
