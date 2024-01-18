@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react'
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import './ListUser.css';
 export const ListUser = () => {
     
     const [users, setUsers] = useState([]);
@@ -11,6 +11,15 @@ export const ListUser = () => {
         console.log(res.data.data);
         setUsers(res.data.data);
     }
+    const deleteUser = async id => {
+        await axios.delete(`http://localhost:3002/user/user/${id}`);
+        loadUsers();
+    }
+    const updateUser = async id => {
+        await axios.put(`http://localhost:3002/user/user/${id}`);
+        loadUsers();
+    }
+
     useEffect(() => {
         loadUsers();
     }, []);
@@ -35,6 +44,7 @@ export const ListUser = () => {
             <th scope="col">Email</th>
             <th scope="col">Mobile No.</th>
             <th scope="col">Status</th>
+            <th scope="col">Action</th>
 
         </tr>
     </thead>
@@ -47,6 +57,10 @@ export const ListUser = () => {
             <td>{user.email}</td>
             <td>{user.mobile_no}</td>
             <td>{user.status}</td>
+            <td>
+                <button onClick={deleteUser} className="btn btn-outline-primary button-edit">Edit</button>
+                <button onClick={updateUser} className="btn btn-outline-danger">Delete</button>
+            </td>
         </tr>
         ))}
     </tbody>

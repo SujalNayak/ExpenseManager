@@ -66,7 +66,7 @@ const addUserWithEncryption = async(req,res) => {
             data: data
         }),
         mailer.sendMail(req.body.email,req.body.fname,"This is the Mail from Sujal Nayak","This is test mail from nodejs").then((data)=>{
-            console.log(data);
+            // console.log(data);
         }).catch((err)=>{
             console.log(err);
         })
@@ -129,6 +129,51 @@ const removeUser = (req,res) => {
     })
 }
 
+const loginwithenc = async(req,res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const userObj = {
+        email:email,
+        password:password
+    }
+    const user = new userSchema(userObj);
+    console.log(user);
+    const token = tokenutil.generateToken(userObj);
+    console.log(token);
+    userSchema.findOne({email:email}).then(async(data)=>{
+        if(data){
+            const isMatch = await password.comparePassword(password,data.password);
+            if(isMatch){
+                res.status(200).json({
+                    message:"success",
+                    success:true,
+                    data:data,
+                    token:token
+                })
+            }
+            else{
+                res.status(401).json({
+                    message:"Invalid Credentials",
+                    success:false,
+                })
+            }
+        }
+        else{
+            res.status(401).json({
+                message:"Invalid Credentials",
+                success:false,
+            })
+        }
+    }).catch((err)=>{
+        res.status(500).json({
+            message:"error",
+            error:err
+        })
+    })
+
+}
+
 
 
 //export
@@ -138,5 +183,6 @@ module.exports=
     getUsers,
     updateUser,
     removeUser,
-    addUserWithEncryption
+    addUserWithEncryption,
+    loginwithenc
 };

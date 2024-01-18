@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link,useNavigate } from 'react-router-dom'
-// import { LoginUser } from '../components/Login'
+import { Login } from './users/Login';
+import axios from "axios";
 
 
 export const Navbar = (props) => {
-  // const navigate = useNavigate();
-  // const logout= ()=>{
-  //   localStorage.removeItem('token');
-  //   navigate('/');
-  // }
+  const navigate = useNavigate();
+  const logout= ()=>{
+    localStorage.removeItem('token');
+    navigate('/');
+  }
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +39,8 @@ export const Navbar = (props) => {
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button className="btn btn-outline-primary" onClick={()=>{<Login/>}}>LogIn</button>
+        <button className="btn btn-outline-danger" onClick={logout}>LogOut</button>
       </form>
     </div>
   </nav>

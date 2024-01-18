@@ -9,6 +9,7 @@ router.get("/user", userController.getUsers);
 router.put("/user/:id", userController.updateUser);
 router.delete('/user/:id', userController.removeUser);
 router.post('/userenc', userController.addUserWithEncryption);
+router.post('/loginenc', userController.loginwithenc);
 
 //export
 module.exports = router;

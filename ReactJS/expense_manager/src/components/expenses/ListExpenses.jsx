@@ -11,6 +11,14 @@ export const ListExpenses = () => {
         console.log(res.data.data);
         setExpenses(res.data.data);
     }
+    const deleteExpense = async id => {
+        await axios.delete(`http://localhost:3002/expense/expense/${id}`);
+        loadExpenses();
+    }
+    const updateExpense = async id => {
+        await axios.put(`http://localhost:3002/expense/expense/${id}`);
+        loadExpenses();
+    }
     useEffect(() => {
         loadExpenses();
     }, []);
@@ -33,6 +41,7 @@ export const ListExpenses = () => {
             <th scope="col">Id</th>
             <th scope="col">Expense Catagory</th>
             <th scope="col">Status</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +50,10 @@ export const ListExpenses = () => {
             <td>{expense.id}</td>
             <td>{expense.name}</td>
             <td>{expense.status}</td>
+            <td>
+                <button onClick={deleteExpense} className="btn btn-outline-primary">Edit</button>
+                <button onClick={updateExpense} className="btn btn-outline-danger">Delete</button>
+            </td>
         </tr>
         ))}
     </tbody>
