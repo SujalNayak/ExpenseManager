@@ -1,9 +1,11 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import TextField from '@mui/material/TextField';
+import "../Master.css";
 
+
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 export const AddUser = () => {
   const { register, handleSubmit} = useForm();
   const submitHandler = async(data) => {
@@ -21,105 +23,36 @@ export const AddUser = () => {
     console.log(res.data);
     
   };
-  toast.success("User Added Successfully!", {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-});
+
+  const [value, setValue] = React.useState('Active');
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
 
   return (
     <div class="dropdown">
-    {/* <div class="dropdown-menu"> */}
-  <form class="px-4 py-3" onSubmit={handleSubmit(submitHandler)}>
-  <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Id</label>
-      <input type="number" class="form-control" placeholder="id" {...register("id")}></input>
-    </div>
-    <div class="form-group">
-      <label for="exampleDropdownFormEmail1">First Name</label>
-      <input type="text" class="form-control" placeholder="First Name" {...register("fname")}></input>
-    </div>
-    <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Last Name</label>
-      <input type="text" class="form-control" placeholder="Last Name" {...register("lname")}></input>
-    </div>
-    <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Email address</label>
-      <input type="email" class="form-control" placeholder="email@example.com" {...register("email")}></input>
-    </div>
-    <div class="form-group">
-      <label for="exampleDropdownFormPassword1">Password</label>
-      <input type="password" class="form-control" placeholder="Password" {...register("password")}></input>
-    </div>
-    <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Mobile No.</label>
-      <input type="number" class="form-control" {...register("mobile_no")}></input>
-    </div>
-    <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Status</label>
-      <select {...register("status")}>
-              <option>Active</option>
-              <option>Inactive</option>
-            </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-  </form>
-  <div class="dropdown-divider"></div>
-  <a class="dropdown-item" href="#">Already User? Login</a>
-  <a class="dropdown-item" href="#">Forgot password?</a>
+      <h2>Add User</h2>
+  <TextField id="outlined-basic" label="Id" variant="outlined" {...register("id")} /><br /><br />
+  <TextField id="outlined-basic" label="First Name" variant="outlined" {...register("fname")} /><br /><br />
+  <TextField id="outlined-basic" label="Last Name" variant="outlined" {...register("lname")} /><br /><br />
+  <TextField id="outlined-basic" label="E-mail" variant="outlined" {...register("email")} /><br /><br />
+  <TextField id="outlined-basic" label="Password" variant="outlined" {...register("password")} /><br /><br />
+  <TextField id="outlined-basic" label="Mobile Number" variant="outlined" {...register("mobile_no")} /><br /><br />
+  <FormControl>
+  <FormLabel id="demo-controlled-radio-buttons-group">Status</FormLabel>
+  <RadioGroup
+    aria-labelledby="demo-controlled-radio-buttons-group"
+    name="controlled-radio-buttons-group"
+    value={value}
+    onChange={handleChange}
+    {...register("status")}
+  >
+    <FormControlLabel value="Active" control={<Radio />} label="Active" />
+    <FormControlLabel value="Inactive" control={<Radio />} label="Inactive" />
+  </RadioGroup>
+</FormControl><br /><br />
+  <Button type="submit" variant="outlined" onClick={handleSubmit(submitHandler)}>Submit</Button>
 </div>
-// </div>
   );
 };
-
-{/* <div>
-      <h1>ADD USER</h1>
-      <div>
-        <form onSubmit={handleSubmit(submitHandler)}>
-          <div>
-            <label htmlFor="id">Id: </label>
-            <input
-              type="number"
-              name="id"
-              id="id"
-              {...register("id")}
-            />
-          </div>
-          <div>
-            <label htmlFor="fname">First Name: </label>
-            <input type="text" {...register("fname")}/>
-          </div>
-          <div>
-            <label htmlFor="lname">Last Name: </label>
-            <input type="text" {...register("lname")}/>
-          </div>
-          <div>
-            <label htmlFor="email">E-mail: </label>
-            <input type="email" {...register("email")}/>
-          </div>
-          <div>
-            <label htmlFor="password">Password: </label>
-            <input type="password" {...register("password")}/>
-          </div>
-          <div>
-            <label htmlFor="mobile_no">Mobile No: </label>
-            <input type="number" {...register("mobile_no")}/>
-          </div>
-          <div>
-            <label htmlFor="Status">Status: </label>
-            <select {...register("status")}>
-              <option>Active</option>
-              <option>Inactive</option>
-            </select>
-            </div>
-          <div>
-            <input type="submit" value="Save User" />
-          </div>
-        </form>
-      </div>
-    </div> */}

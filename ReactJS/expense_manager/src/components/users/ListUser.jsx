@@ -1,8 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import './ListUser.css';
+import "../Master.css";
+import { Button } from '@mui/material';
 export const ListUser = () => {
     
     const [users, setUsers] = useState([]);
@@ -23,16 +22,6 @@ export const ListUser = () => {
     useEffect(() => {
         loadUsers();
     }, []);
-    toast.success("Users Listed Successfully!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-    });
     return (
     <div> <h2>List User</h2>
         <table class="table table-striped table-hover table-bordered border-primary table-responsive-md text-center">
@@ -58,8 +47,8 @@ export const ListUser = () => {
             <td>{user.mobile_no}</td>
             <td>{user.status}</td>
             <td>
-                <button onClick={deleteUser} className="btn btn-outline-primary button-edit">Edit</button>
-                <button onClick={updateUser} className="btn btn-outline-danger">Delete</button>
+                <Button id='button-edit' variant="outlined" color="primary" onClick={updateUser}>Update</Button>
+                <Button variant="outlined" color="error" onClick={deleteUser}>Delete</Button>
             </td>
         </tr>
         ))}

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from '@mui/material';
 
 export const ListExpenses = () => {
     const [expenses, setExpenses] = useState([]);
@@ -51,8 +52,8 @@ export const ListExpenses = () => {
             <td>{expense.name}</td>
             <td>{expense.status}</td>
             <td>
-                <button onClick={deleteExpense} className="btn btn-outline-primary">Edit</button>
-                <button onClick={updateExpense} className="btn btn-outline-danger">Delete</button>
+                <Button id='button-edit' variant="outlined" color="primary" onClick={updateExpense}>Update</Button>
+                <Button variant="outlined" color="error" onClick={deleteExpense}>Delete</Button>
             </td>
         </tr>
         ))}

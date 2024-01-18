@@ -1,8 +1,7 @@
 import React from 'react'
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 
 export const AddExpenses = () => {
   
@@ -17,40 +16,30 @@ export const AddExpenses = () => {
       console.log(res.data);
       
     };
-    toast.success("Expense Added Successfully!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-    });
-  
+
+    const [value, setValue] = React.useState('Active');
+    const handleChange = (event) => {
+    setValue(event.target.value);
+  };
     return (
     <div class="dropdown">
-        {/* <h1>Add Expenses</h1> */}
-        <form onSubmit={handleSubmit(submitHandler)}>
-        <div data-mdb-input-init class="form-outline mb-4">
-        <input type="text" id="form7Example1" class="form-control" placeholder='id' {...register("id")} />
-        {/* <label class="form-label" for="form7Example1">id</label> */}
-        </div>
-
-        <div data-mdb-input-init class="form-outline mb-4">
-        <input type="text" id="form7Example2" class="form-control" placeholder='Expense Catagory'{...register("name")} />
-        {/* <label class="form-label" for="form7Example2">Expense Catagory</label> */}
-        </div>
-
-        <div class="form-group">
-      <label for="exampleDropdownFormEmail1">Status:  </label>
-      <select {...register("status")}>
-              <option>Active</option>
-              <option>Inactive</option>
-            </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+      <h2>Add Expenses</h2>
+      <TextField id="outlined-basic" label="Id" variant="outlined" {...register("id")} /><br /><br />
+      <TextField id="outlined-basic" label="Expense Name" variant="outlined" {...register("name")} /><br /><br />
+      <FormControl>
+        <FormLabel id="demo-controlled-radio-buttons-group">Status</FormLabel>
+          <RadioGroup
+          aria-labelledby="demo-controlled-radio-buttons-group"
+          name="controlled-radio-buttons-group"
+          value={value}
+          onChange={handleChange}
+          {...register("status")}
+          >
+            <FormControlLabel value="Active" control={<Radio />} label="Active" />
+            <FormControlLabel value="Inactive" control={<Radio />} label="Inactive" />
+          </RadioGroup>
+      </FormControl><br /><br />
+      <Button type="submit" variant="outlined" onClick={handleSubmit(submitHandler)}>Submit</Button>
     </div>
   )
 }

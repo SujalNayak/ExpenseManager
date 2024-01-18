@@ -1,23 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Button } from '@mui/material';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export const WdywUser = () => {
+  const navigate = useNavigate();
+  const AddUser= ()=>{
+    navigate('/AddUser');
+  }
+  const ListUser= ()=>{
+    navigate('/ListUser');
+  }
   return (
     <div>WdywUser
         <h1>What do you want to do?</h1>
-        
-        <button type="button" class="btn btn-primary btn-outline-primary">
-        <Link className="nav-link" to="/AddUser">
-              Add User
-            </Link>
-          </button><br /><br />
-        <button type="button" class="btn btn-primary btn-outline-primary">
-        <Link className="nav-link" to="/ListUser">
-              List User
-            </Link>
-          </button><br /><br />
+        <br /><br /><br />
+        <Button variant='outlined' color='primary' onClick={AddUser}>Add Expenses</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Button variant='outlined' color='primary' onClick={ListUser}>List Expenses</Button>
     </div>
   )
 }

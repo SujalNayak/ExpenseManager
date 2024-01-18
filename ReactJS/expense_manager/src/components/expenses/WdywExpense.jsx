@@ -1,21 +1,23 @@
+import { Button } from '@mui/material'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export const WdywExpense = () => {
+  const navigate = useNavigate();
+  const AddExpenses= ()=>{
+    navigate('/AddExpenses');
+  }
+  const ListExpenses= ()=>{
+    navigate('/ListExpenses');
+  }
   return (
     <div>
         <h1>What do you want to do?</h1>
-        
-        <button type="button" class="btn btn-primary btn-outline-primary">
-        <Link className="nav-link" to="/Expense">
-              Add Expenses
-            </Link>
-          </button><br /><br />
-        <button type="button" class="btn btn-primary btn-outline-primary">
-        <Link className="nav-link" to="/ListExpenses">
-              List Expenses
-            </Link>
-          </button><br /><br />
+        <br /><br /><br />
+        <Button variant='outlined' color='primary' onClick={AddExpenses}>Add Expenses</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Button variant='outlined' color='primary' onClick={ListExpenses}>List Expenses</Button>
+
+       
     </div>
   )
 }
