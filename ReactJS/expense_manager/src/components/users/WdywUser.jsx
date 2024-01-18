@@ -8,12 +8,12 @@ export const WdywUser = () => {
     <div>WdywUser
         <h1>What do you want to do?</h1>
         
-        <button type="button" class="btn btn-primary btn-success">
+        <button type="button" class="btn btn-primary btn-outline-primary">
         <Link className="nav-link" to="/AddUser">
               Add User
             </Link>
           </button><br /><br />
-        <button type="button" class="btn btn-primary btn-success">
+        <button type="button" class="btn btn-primary btn-outline-primary">
         <Link className="nav-link" to="/ListUser">
               List User
             </Link>

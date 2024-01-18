@@ -114,7 +114,6 @@ const updateUser = (req,res) => {
 
 //delete user
 const removeUser = (req,res) => {
-
     const id = req.params.id;
     userSchema.findByIdAndDelete(id).then((data)=>{
         res.status(200).json({

@@ -10,6 +10,8 @@ const userRoutes = require("./routes/UserRoutes");
 app.use('/user', userRoutes);
 const expenseRoutes = require("./routes/ExpenseRoutes");
 app.use('/expense', expenseRoutes);
+const expenseSubCatRoutes = require("./routes/ExpenseSubCatRoutes");
+app.use('/expenseSubCat', expenseSubCatRoutes);
 
 mongoose.connect("mongodb://127.0.0.1:27017/ExpenseManager", {
   // useNewUrlParser: true,
