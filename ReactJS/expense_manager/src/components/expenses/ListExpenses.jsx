@@ -42,6 +42,7 @@ export const ListExpenses = () => {
             <th scope="col">Id</th>
             <th scope="col">Expense Catagory</th>
             <th scope="col">Status</th>
+            <th scope="col">Add Sub Catagory</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -51,6 +52,7 @@ export const ListExpenses = () => {
             <td>{expense.id}</td>
             <td>{expense.name}</td>
             <td>{expense.status}</td>
+            <td><Button id='button-edit' variant="outlined" color="primary" onClick={updateExpense}>Add Expense Sub Catagory</Button></td>
             <td>
                 <Button id='button-edit' variant="outlined" color="primary" onClick={updateExpense}>Update</Button>
                 <Button variant="outlined" color="error" onClick={deleteExpense}>Delete</Button>
