@@ -17,15 +17,15 @@ function App() {
     <div className="App">
       <Navbar/>
       <Routes>
-        {/* <Route path="/" element={<Login/>}></Route> */}
-        {/* <Route element={<ProtectedRoutes/>}> */}
+        <Route path="/" element={<Login/>}></Route>
+        <Route element={<ProtectedRoutes/>}>
         <Route path="/AddUser" element={<AddUser/>}></Route>
         <Route path='/WdywExpense' element={<WdywExpense/>}></Route>
         <Route path='/AddExpenses' element={<AddExpenses/>}></Route>
         <Route path='/ListUser' element={<ListUser/>}></Route>
         <Route path='/ListExpenses' element={<ListExpenses/>}></Route>
         <Route path='/WdywUser' element={<WdywUser/>}></Route>
-        {/* </Route> */}
+        </Route>
       </Routes>
     </div>
   );

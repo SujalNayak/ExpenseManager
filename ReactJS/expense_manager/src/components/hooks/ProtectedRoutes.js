@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 const useAuth = () => {
-    const {isAuth, setIsAuth} = useState(false);
+    const [isAuth, setIsAuth] = useState(false);
     useEffect(() => {
         const token = localStorage.getItem('token');
         if(token){

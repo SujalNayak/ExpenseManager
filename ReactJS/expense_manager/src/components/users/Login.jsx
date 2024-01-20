@@ -3,6 +3,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button, TextField } from '@mui/material';
 
 
 export const Login = () => {
@@ -13,22 +14,16 @@ export const Login = () => {
       formData.append("email", data.email);
       formData.append("password", data.password);
       try{
-      const res = await axios.post("http://localhost:3002/user/loginenc", data)
+      const res = await axios.post("http://localhost:3002/user/loginwithenc", data)
       console.log(res.data);
 
       localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', res.data.user);
+      const user = localStorage.getItem('user');
 
-      toast.success("LogIn Successfull!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-    });
-}
+     console.log(localStorage.getItem('token'));
+     console.log("Login Successful");
+      }
       catch(err){
         console.log(err);
       }
@@ -37,19 +32,9 @@ export const Login = () => {
   return (
     <div>
         <h2>Login</h2>
-        <form onSubmit={handleSubmit(submitHandler)}>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" {...register("email")}/>
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" {...register("password")}/>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <TextField id="outlined-basic" label="E-mail" variant="outlined" {...register("email")} /><br /><br />
+        <TextField id="outlined-basic" label="Password" variant="outlined" {...register("password")} /><br /><br />
+        <Button type="submit" variant="outlined" onClick={handleSubmit(submitHandler)}>Submit</Button>
     </div>
   )
 }
