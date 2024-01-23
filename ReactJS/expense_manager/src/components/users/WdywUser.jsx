@@ -16,8 +16,8 @@ export const WdywUser = () => {
     <div>WdywUser
         <h1>What do you want to do?</h1>
         <br /><br /><br />
-        <Button variant='outlined' color='primary' onClick={AddUser}>Add Expenses</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant='outlined' color='primary' onClick={ListUser}>List Expenses</Button>
+        <Button variant='outlined' color='primary' onClick={AddUser}>Add User</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Button variant='outlined' color='primary' onClick={ListUser}>List User</Button>
     </div>
   )
 }

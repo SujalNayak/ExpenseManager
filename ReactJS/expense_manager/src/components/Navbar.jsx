@@ -7,6 +7,11 @@ import axios from "axios";
 
 export const Navbar = (props) => {
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  // console.log(token);
+  // if(!token){
+  //   navigate('/');
+  // }  
   const logout= ()=>{
     localStorage.removeItem('token');
     navigate('/');

@@ -1,7 +1,7 @@
 const userSchema = require("../model/UserModel");
 const mailer = require("../util/NodeMailer")
 const multer = require("multer");
-const password = require("../util/PaswordUtil");
+const passwordUtil = require("../util/PaswordUtil");
 const tokenutil = require("../util/TokenUtil");
 
   
@@ -53,7 +53,7 @@ const addUserWithEncryption = async(req,res) => {
         fname:req.body.fname,
         lname:req.body.lname,
         email:req.body.email,
-        password:await password.encryptPassword(req.body.password),
+        password:await passwordUtil.encryptPassword(req.body.password),
         mobile_no:req.body.mobile_no,
         status:req.body.status,
     }
@@ -129,50 +129,90 @@ const removeUser = (req,res) => {
     })
 }
 
-const loginwithenc = async(req,res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+// const loginwithenc = async(req,res) => {
 
-    const userObj = {
-        email:email,
-        password:password
-    }
-    const user = new userSchema(userObj);
-    console.log(user);
-    const token = tokenutil.generateToken(userObj);
-    console.log(token);
-    userSchema.findOne({email:email}).then(async(data)=>{
-        if(data){
-            const isMatch = await password.comparePassword(password,data.password);
-            if(isMatch){
-                res.status(200).json({
-                    message:"success",
-                    success:true,
-                    data:data,
-                    token:token
-                })
-            }
-            else{
-                res.status(401).json({
-                    message:"Invalid Credentials",
-                    success:false,
-                })
-            }
+//     const userObj = {
+//         email: req.body.email,
+//         password: req.body.password
+//     }
+//     const user = new userSchema(userObj);
+//     console.log(user);
+//     const token = tokenutil.generateToken(userObj);
+//     console.log(token);
+//     console.log(user.email);
+//     userSchema.find({email: userObj.email}).then(async(data)=>{
+//         if(data){
+//             const isMatch = await password.comparePassword(password,data.password);
+//             if(isMatch){
+//                 res.status(200).json({
+//                     message:"success",
+//                     success:true,
+//                     data:data,
+//                     token:token
+//                 })
+//             }
+//             else{
+//                 res.status(401).json({
+//                     message:"Invalid Credentials",
+//                     success:false,
+//                 })
+//             }
+//         }
+//         else{
+//             res.status(401).json({
+//                 message:"Invalid Credentials",
+//                 success:false,
+//             })
+//         }
+//     }).catch((err)=>{
+//         res.status(500).json({
+//             message:"error",
+//             error:err
+//         })
+//     })
+
+// }
+
+// const bcrypt = require('bcryptjs');
+
+const loginWithEnc = async (req, res) => {
+    var { email, password } = req.body;
+
+    try {
+        const user = await userSchema.findOne({ email });
+        
+        if (!user) {
+            return res.status(401).json({
+                message: "Invalid Credentials",
+                success: false,
+            });
         }
-        else{
-            res.status(401).json({
-                message:"Invalid Credentials",
-                success:false,
-            })
+
+        const isMatch = await passwordUtil.comparePassword(password, user.password);
+
+        if (!isMatch) {
+            return res.status(401).json({
+                message: "Invalid Credentials",
+                success: false,
+            });
         }
-    }).catch((err)=>{
+
+        const token = tokenutil.generateToken(user.toObject());
+
+        res.status(200).json({
+            message: "success",
+            success: true,
+            data: user,
+            token: token
+        });
+    } catch (err) {
+        console.error(err);
         res.status(500).json({
-            message:"error",
-            error:err
-        })
-    })
-
-}
+            message: "error",
+            error: err
+        });
+    }
+};
 
 
 
@@ -184,5 +224,5 @@ module.exports=
     updateUser,
     removeUser,
     addUserWithEncryption,
-    loginwithenc
+    loginWithEnc
 };

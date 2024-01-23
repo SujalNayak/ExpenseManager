@@ -18,10 +18,11 @@ export const Login = () => {
       console.log(res.data);
 
       localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', res.data.user);
+      // localStorage.setItem('user', res.data.user);
       const user = localStorage.getItem('user');
+      const token = localStorage.getItem('token');
+     console.log(token);
 
-     console.log(localStorage.getItem('token'));
      console.log("Login Successful");
       }
       catch(err){
