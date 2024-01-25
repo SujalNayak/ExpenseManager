@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ExpenseSubCatSchema = new Schema({
-    id: {type : String, required : true},
-    name:{ type:String },
-    status: {type: String , default :"Active"},
-    User_id: {type: Schema.Types.ObjectId, ref: 'UserModel'},
+    id: { type: String, required: true },
+    name: { type: String },
+    status: { type: String, default: "Active" },
+    User_id: { type: Schema.Types.ObjectId, ref: "ExpenseModel" },
 });
 
-module.exports= mongoose.model("ExpenseSubCatModel" , ExpenseSubCatSchema);
+module.exports = mongoose.model("ExpenseSubCatModel", ExpenseSubCatSchema);

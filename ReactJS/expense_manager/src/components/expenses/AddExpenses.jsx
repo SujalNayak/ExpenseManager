@@ -22,13 +22,21 @@ export const AddExpenses = () => {
   const [expenses, setExpenses] = React.useState([]);
   const [selectedExpense, setSelectedExpense] = React.useState("");
   const submitHandler = async (data) => {
-    const formData = new FormData();
-    formData.append("id", data.id);
-    formData.append("name", data.name);
-    formData.append("status", data.status);
-    formData.append("expense", selectedExpense);
-    const res = await axios.post("http://localhost:3002/expenseSubCat/expenseSubCat", data);
-    console.log(res.data);
+      const formData = new FormData();
+      formData.append("id", data.id);
+      formData.append("name", data.name);
+      formData.append("status", data.status);
+      formData.append("expense", selectedExpense);
+      const res = await axios.post(
+        "http://localhost:3002/expenseSubCat/expenseSubCat", 
+        formData, 
+        {
+          headers: {
+            'Authorization': "Bearer " + localStorage.getItem("token")
+          }
+        }
+      );
+      console.log(res.data);
   };
   const loadExpenses = async() => {
     const res = await axios.get("http://localhost:3002/expense/expense");

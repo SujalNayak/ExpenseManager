@@ -12,6 +12,14 @@ const generateToken = (user) => {
     return token
 }
 
+const generateExpenseToken = (expense) => {
+    const token = jwt.sign(expense,secret,{
+        expiresIn: '7d'
+    })
+    console.log(token)
+    return token
+}
+
 
 
 const validateToken = (token) => {
@@ -28,7 +36,11 @@ const validateToken = (token) => {
 
 }
 
+
+
 module.exports = {
     generateToken,
-    validateToken
+    validateToken,
+    generateExpenseToken,
+   
 }

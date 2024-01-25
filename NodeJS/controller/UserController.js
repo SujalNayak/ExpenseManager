@@ -3,6 +3,7 @@ const mailer = require("../util/NodeMailer")
 const multer = require("multer");
 const passwordUtil = require("../util/PaswordUtil");
 const tokenutil = require("../util/TokenUtil");
+const { get } = require("mongoose");
 
   
 
@@ -60,6 +61,7 @@ const addUserWithEncryption = async(req,res) => {
     const user = new userSchema(userObj);
     var token = tokenutil.generateToken(userObj);
     user.save().then((data) => {
+        console.log("1");
         res.status(201).json({
             message: "Data has been saved",
             success: true,
@@ -71,6 +73,7 @@ const addUserWithEncryption = async(req,res) => {
             console.log(err);
         })
     }).catch((err) => {
+        console.log("2");
         res.status(500).json({
             message: "error",
             error: err
@@ -78,6 +81,41 @@ const addUserWithEncryption = async(req,res) => {
         console.log(err);   
     })
 }
+
+
+const getUserByToken = async (token) => {
+    // token = req.headers.authorization.split(" ")[1];
+
+    try {
+        // Validate and decode the token
+        const decoded = tokenutil.validateToken(token);
+
+        // Find the user by id
+        const user = await userSchema.findById(decoded.id);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                success: false,
+            });
+        }
+
+        // Send the user data
+        res.status(200).json({
+            message: "success",
+            success: true,
+            data: user,
+        });
+        console.log("Token is valid");
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "error",
+            error: err
+        });
+    }
+};
+
 
 // const updateUser = (req,res) => {
 
@@ -198,7 +236,7 @@ const loginWithEnc = async (req, res) => {
         }
 
         const token = tokenutil.generateToken(user.toObject());
-
+        // getUserByToken(token);
         res.status(200).json({
             message: "success",
             success: true,
@@ -224,5 +262,6 @@ module.exports=
     updateUser,
     removeUser,
     addUserWithEncryption,
-    loginWithEnc
+    loginWithEnc,
+    getUserByToken
 };

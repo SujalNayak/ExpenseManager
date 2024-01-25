@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 import "../Master.css";
 
-
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const AddUser = () => {
   const { register, handleSubmit} = useForm();
   const submitHandler = async(data) => {
@@ -19,9 +20,21 @@ export const AddUser = () => {
     formData.append("mobile_no", data.mobile_no);
     formData.append("status", data.status);
     
-    const res = await axios.post("http://localhost:3002/user/userenc", data)
+    const res = await axios.post("http://localhost:3002/user/userenc", data);
     console.log(res.data);
     
+    toast.success('User Added Successfully!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      });
+
   };
 
   const [value, setValue] = React.useState('Active');
@@ -53,6 +66,7 @@ export const AddUser = () => {
   </RadioGroup>
 </FormControl><br /><br />
   <Button type="submit" variant="outlined" onClick={handleSubmit(submitHandler)}>Submit</Button>
+  <ToastContainer />
 </div>
   );
 };
