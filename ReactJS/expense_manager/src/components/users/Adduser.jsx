@@ -20,7 +20,7 @@ export const AddUser = () => {
     formData.append("mobile_no", data.mobile_no);
     formData.append("status", data.status);
     
-    const res = await axios.post("http://localhost:3002/user/userenc", data);
+    const res = await axios.post("http://localhost:3002/user/user", data);
     console.log(res.data);
     
     toast.success('User Added Successfully!', {
@@ -46,7 +46,7 @@ export const AddUser = () => {
   return (
     <div class="dropdown">
       <h2>Add User</h2>
-  <TextField id="outlined-basic" label="Id" variant="outlined" {...register("id")} /><br /><br />
+ 
   <TextField id="outlined-basic" label="First Name" variant="outlined" {...register("fname")} /><br /><br />
   <TextField id="outlined-basic" label="Last Name" variant="outlined" {...register("lname")} /><br /><br />
   <TextField id="outlined-basic" label="E-mail" variant="outlined" {...register("email")} /><br /><br />

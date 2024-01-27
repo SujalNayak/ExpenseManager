@@ -8,7 +8,8 @@ import { Button } from '@mui/material';
 export const ListExpenses = () => {
     const [expenses, setExpenses] = useState([]);
     const loadExpenses = async() => {
-        const res = await axios.get("http://localhost:3002/expense/expense");
+        const id = localStorage.getItem("id");
+        const res = await axios.get(`http://localhost:3002/expense/expense/${id}`);
         console.log(res.data.data);
         setExpenses(res.data.data);
     }

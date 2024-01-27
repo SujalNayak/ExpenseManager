@@ -25,27 +25,6 @@ const getUsers = (req,res) => {
     
 }
 
-const addUser = (req,res) => {
-    const user = new userSchema(req.body);
-    user.save().then((data) => {
-        res.status(201).json({
-            message: "Data has been saved",
-            success: true,
-            data: data
-        }),
-        mailer.sendMail(req.body.email,"This is the Mail from Sujal Nayak","This is test mail from nodejs").then((data)=>{
-            console.log(data);
-        }).catch((err)=>{
-            console.log(err);
-        })
-    }).catch((err) => {
-        res.status(500).json({
-            message: "error",
-            error: err
-        })
-        console.log(err);   
-    })
-};
 
 
 const addUserWithEncryption = async(req,res) => {
@@ -83,16 +62,16 @@ const addUserWithEncryption = async(req,res) => {
 }
 
 
-const getUserByToken = async (token) => {
+const getUserByToken = async (req,res) => {
     // token = req.headers.authorization.split(" ")[1];
-
+    token  = req.body.token;
     try {
         // Validate and decode the token
         const decoded = tokenutil.validateToken(token);
-
+        console.log(decoded);
         // Find the user by id
-        const user = await userSchema.findById(decoded.id);
-
+        const user = await userSchema.findById(decoded._id);
+        console.log(user);
         if (!user) {
             return res.status(404).json({
                 message: "User not found",
@@ -117,19 +96,6 @@ const getUserByToken = async (token) => {
 };
 
 
-// const updateUser = (req,res) => {
-
-//     const id = parseInt(req.params.id);
-//     const userIndex = userSchema.findIndex(userSchema => userSchema.id === id);
-
-//     if(userIndex === -1){
-//         return res.status(400).json({message:'Invalid User ID'});
-//     }
-//     const updatedUser = req.body;
-//     userSchema[userIndex] = updatedUser;
-    
-//     return res.status(200).json(userSchema[userIndex]);
-// }
 
 //update user
 const updateUser = (req,res) => {
@@ -167,51 +133,6 @@ const removeUser = (req,res) => {
     })
 }
 
-// const loginwithenc = async(req,res) => {
-
-//     const userObj = {
-//         email: req.body.email,
-//         password: req.body.password
-//     }
-//     const user = new userSchema(userObj);
-//     console.log(user);
-//     const token = tokenutil.generateToken(userObj);
-//     console.log(token);
-//     console.log(user.email);
-//     userSchema.find({email: userObj.email}).then(async(data)=>{
-//         if(data){
-//             const isMatch = await password.comparePassword(password,data.password);
-//             if(isMatch){
-//                 res.status(200).json({
-//                     message:"success",
-//                     success:true,
-//                     data:data,
-//                     token:token
-//                 })
-//             }
-//             else{
-//                 res.status(401).json({
-//                     message:"Invalid Credentials",
-//                     success:false,
-//                 })
-//             }
-//         }
-//         else{
-//             res.status(401).json({
-//                 message:"Invalid Credentials",
-//                 success:false,
-//             })
-//         }
-//     }).catch((err)=>{
-//         res.status(500).json({
-//             message:"error",
-//             error:err
-//         })
-//     })
-
-// }
-
-// const bcrypt = require('bcryptjs');
 
 const loginWithEnc = async (req, res) => {
     var { email, password } = req.body;
@@ -234,7 +155,7 @@ const loginWithEnc = async (req, res) => {
                 success: false,
             });
         }
-
+        console.log(user.toObject());
         const token = tokenutil.generateToken(user.toObject());
         // getUserByToken(token);
         res.status(200).json({
@@ -257,7 +178,7 @@ const loginWithEnc = async (req, res) => {
 //export
 module.exports=
 {
-    addUser,
+ 
     getUsers,
     updateUser,
     removeUser,

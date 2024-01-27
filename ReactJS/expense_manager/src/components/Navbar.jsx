@@ -42,26 +42,11 @@ export const Navbar = (props) => {
                         </a>
                     </li>
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item active"></li>
-
-                        {/* <FormControl sx={{ m: 1, minWidth: 120 }}>
-                                <InputLabel id="demo-simple-select-helper-label">
-                                    Users
-                                </InputLabel>
-                                <Select>
-                                    <MenuItem navigate = {useNavigate('/AddUser')}>
-                                        Add User
-                                    </MenuItem>
-                                    <MenuItem navigate = {useNavigate('/ListUser')}>
-                                        List User
-                                    </MenuItem>
-                                </Select>
-                            </FormControl> */}
-                        <Select label = 'User'>
-                            <Option value={10}>Ten</Option>
-                            <Option value={20}>Twenty</Option>
-                            <Option value={30}>Thirty</Option>
-                        </Select>
+                        <li className="nav-item active">
+                            <Link className="nav-link" to="/WdywUser">
+                                Users
+                            </Link>
+                        </li>
 
                         <li className="nav-item active">
                             <Link className="nav-link" to="/WdywExpense">

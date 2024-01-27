@@ -40,7 +40,7 @@ export const ListUser = () => {
     <tbody>
         {users.map((user, index) => (
         <tr key={index}>
-            <td>{user.id}</td>
+            {/* <td>{user.id}</td> */}
             <td>{user.fname}</td>
             <td>{user.lname}</td>
             <td>{user.email}</td>

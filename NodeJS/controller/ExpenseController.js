@@ -63,7 +63,7 @@ const getExpenses = (req,res) => {
 
 //get expense by id
 const getExpenseById = (req,res) => {
-    Schema.findById(req.params.id).then((data)=>{
+    Schema.find({User_id: req.params.id}).then((data)=>{
         res.status(200).json({
             message:"success",
             success:true,

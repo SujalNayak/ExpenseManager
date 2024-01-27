@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 
 const UserSchema = new Schema({
-    id: {type : Number , required : true},
     fname:{ type:String },
     lname:{ type:String } ,
     email: {type:String ,required:true , unique:true} , 
@@ -13,5 +12,5 @@ const UserSchema = new Schema({
 });
 
 
-module.exports= mongoose.model("UserModel" , UserSchema);
+module.exports= mongoose.model("UserModel1" , UserSchema);
 

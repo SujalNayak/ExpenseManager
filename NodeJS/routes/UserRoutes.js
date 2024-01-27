@@ -4,12 +4,13 @@ const router = express.Router();
 // Require controller modules.
 const userController = require("../controller/UserController");
 
-// router.post("/user",userController.addUser);
+
 router.get("/user", userController.getUsers);
 router.put("/user/:id", userController.updateUser);
 router.delete('/user/:id', userController.removeUser);
-router.post('/userenc', userController.addUserWithEncryption);
+router.post('/user', userController.addUserWithEncryption);
 router.post('/loginwithenc', userController.loginWithEnc);
+router.post('/user/token', userController.getUserByToken);
 
 
 //export
