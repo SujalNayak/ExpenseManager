@@ -10,10 +10,14 @@ export const WdywExpense = () => {
   const ListExpenses= ()=>{
     navigate('/ListExpenses');
   }
+  const AddExpensesCatagory= ()=>{
+    navigate('/AddExpensesCat');
+  }
   return (
     <div>
         <h1>What do you want to do?</h1>
         <br /><br /><br />
+        <Button variant='outlined' color='primary' onClick={AddExpensesCatagory}>Add Expenses Catagory</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Button variant='outlined' color='primary' onClick={AddExpenses}>Add Expenses</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Button variant='outlined' color='primary' onClick={ListExpenses}>List Expenses</Button>
 

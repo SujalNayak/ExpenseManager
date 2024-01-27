@@ -9,6 +9,7 @@ import { ListExpenses } from './components/expenses/ListExpenses';
 import { WdywUser } from './components/users/WdywUser';
 import { ListUser } from './components/users/ListUser';
 import { ProtectedRoutes } from './components/hooks/ProtectedRoutes';
+import { AddExpenseCat } from './components/expenses/AddExpenseCat';
 import { Login } from './components/users/Login';
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route element={<ProtectedRoutes/>}>
         <Route path="/AddUser" element={<AddUser/>}></Route>
         <Route path='/WdywExpense' element={<WdywExpense/>}></Route>
+        <Route path='/AddExpenseCat' element={<AddExpenseCat/>}></Route>
         <Route path='/AddExpenses' element={<AddExpenses/>}></Route>
         <Route path='/ListUser' element={<ListUser/>}></Route>
         <Route path='/ListExpenses' element={<ListExpenses/>}></Route>

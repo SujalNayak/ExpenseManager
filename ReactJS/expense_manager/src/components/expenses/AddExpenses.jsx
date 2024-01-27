@@ -23,7 +23,7 @@ export const AddExpenses = () => {
   const [selectedExpense, setSelectedExpense] = React.useState("");
   const submitHandler = async (data) => {
       const formData = new FormData();
-      formData.append("id", data.id);
+
       formData.append("name", data.name);
       formData.append("status", data.status);
       formData.append("expense", selectedExpense);
@@ -75,12 +75,6 @@ useEffect(() => {
           ))}
         </Select>
       </FormControl><br />
-      <TextField
-        id="outlined-basic"
-        label="Id"
-        variant="outlined"
-        {...register("id")}
-      />
       <br />
       <br />
       <TextField

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const ExpenseSchema = new Schema({
 
-    id: {type : Number, required : true},
+
     name:{ type:String },
     status: {type: String , default :"Active"},
     catagory: {type: Schema.Types.ObjectId, ref: 'ExpenseModel'},
