@@ -103,6 +103,6 @@ const sendMail = async (to, name, subject,text, html) => {
 }
 
 // sendMail("11a11110sujal2019@gmail.com", "Test Mail", "This is test mail from nodejs")
-module.exports=sendMail;
+module.exports={sendMail};
 
 {/* <p class="footer-text">This is a sample transaction. Please verify the details before proceeding.</p> */}

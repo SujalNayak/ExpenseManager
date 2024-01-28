@@ -8,8 +8,7 @@ const ExpenseSchema = new Schema({
 
     name:{ type:String },
     status: {type: String , default :"Active"},
-    catagory: {type: Schema.Types.ObjectId, ref: 'ExpenseModel'},
-    User_id: {type: Schema.Types.ObjectId, ref: 'UserModel1'},
+    User_id: {type: Schema.Types.ObjectId, ref: 'UserModel1', required: true},
 });
 
 module.exports= mongoose.model("ExpenseModel" , ExpenseSchema);

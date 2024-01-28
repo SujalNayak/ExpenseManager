@@ -11,6 +11,7 @@ import { ListUser } from './components/users/ListUser';
 import { ProtectedRoutes } from './components/hooks/ProtectedRoutes';
 import { AddExpenseCat } from './components/expenses/AddExpenseCat';
 import { Login } from './components/users/Login';
+import { PieChart } from './components/chart/PieChart';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/ListUser' element={<ListUser/>}></Route>
         <Route path='/ListExpenses' element={<ListExpenses/>}></Route>
         <Route path='/WdywUser' element={<WdywUser/>}></Route>
+        <Route path='/PieChart' element={<PieChart/>}></Route>
         </Route>
       </Routes>
     </div>

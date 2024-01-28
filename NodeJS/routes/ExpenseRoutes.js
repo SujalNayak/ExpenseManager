@@ -11,5 +11,14 @@ router.get("/expense/:id", expenseController.getExpenseById);
 router.put("/expense/:id", expenseController.updateExpenseById);
 router.delete("/expense/:id", expenseController.deleteExpenseById);
 
+router.get('/expense', async (req, res) => {
+    try {
+      const userExpenses = await Expense.find({ user: req.user._id }).populate('category');
+      res.json(userExpenses);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
 //export
 module.exports = router;

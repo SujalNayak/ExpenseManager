@@ -53,6 +53,11 @@ export const Navbar = (props) => {
                                 Expenses
                             </Link>
                         </li>
+                        <li className="nav-item active">
+                            <Link className="nav-link" to="/PieChart">
+                                Chart
+                            </Link>
+                        </li>
                     </ul>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
