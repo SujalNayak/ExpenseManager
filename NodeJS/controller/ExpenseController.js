@@ -1,4 +1,5 @@
 const Schema = require("../model/ExpenseModel");
+const tokenutil = require("../util/TokenUtil");
 
 const addExpenses = (req,res) => {
     var expenseObj = {
@@ -24,29 +25,11 @@ const addExpenses = (req,res) => {
     })
 };
 
-// Get the token from localStorage
-// const token = localStorage.getItem('token');
 
-// Send a request to the server with the token in the headers
-// fetch('localhost:3000/', {
-//     headers: {
-//         'Authorization': `Bearer ${token}`
-//     }
-// })
-// .then(response => response.json())
-// .then(data => {
-//     // console.log(data.message); // "success"
-//     // console.log(data.success); // true
-//     // console.log(data.data); // user object
-//     // console.log(data.token); // token
-
-
-// })
-// .catch(error => console.error('Error:', error));
 const getExpenses = (req,res) => {
 
     console.log(Schema);
-    Schema.find().then((data)=>{
+    Schema.find().populate().populate().then((data)=>{
         res.status(200).json({
             message:"success",
             success:true,
@@ -79,7 +62,7 @@ const getExpenseById = (req,res) => {
 }
 
 const getExpenseByToken = (req,res) => {   
-    var token = req.headers.authorization.split(" ")[1];
+    var token = req.body.token;
     var user = tokenutil.validateToken(token);
     console.log(user);
     Schema.findById(user.id).then((data)=>{
