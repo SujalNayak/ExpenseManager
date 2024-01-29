@@ -27,8 +27,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/ExpenseManager", {
     console.log("error..",err);
 })
 
-app.get(/,(req,res)=>{
-        console.log("app is working");
+app.get("/", (req, res) => {
+  res.send("app is working..");
 });
 
 app.listen(PORT, () => {
