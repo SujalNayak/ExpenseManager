@@ -14,13 +14,18 @@ const expenseSubCatRoutes = require("./routes/ExpenseSubCatRoutes");
 app.use('/expenseSubCat', expenseSubCatRoutes);
 
 mongoose.connect("mongodb://127.0.0.1:27017/ExpenseManager", {
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 }).then(()=>{
     console.log("Database Connected Successfully...");
 }).catch((err)=>{
     console.log("error..",err);
 })
+
+app.get("/", (req, res) => {
+  res.send("app is working..");
+});
+
 
 app.listen(PORT, () => {
     console.log("server started on port 3002...");
