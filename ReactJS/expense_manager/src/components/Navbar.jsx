@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { Login } from "./users/Login";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { Option } from '@mui/base/Option';
+import "./Master.css";
+import SearchIcon from '@mui/icons-material/Search';
+
 
 export const Navbar = (props) => {
     const navigate = useNavigate();
@@ -16,6 +17,29 @@ export const Navbar = (props) => {
         localStorage.removeItem("token");
         navigate("/");
     };
+
+    class LoginButton extends React.Component {
+        render() {
+            if (!localStorage.getItem("token")) {
+                return (
+                    <button
+                        className="btn btn-outline-primary"
+                        onClick={() => {
+                            <Login />;
+                        }}
+                    >
+                        LogIn
+                    </button>
+                );
+            } else {
+                return (
+                    <button className="btn btn-outline-danger" onClick={logout}>
+                        LogOut
+                    </button>
+                );
+            }
+        }
+    }
 
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -66,24 +90,16 @@ export const Navbar = (props) => {
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
+                        SearchIcon={<SearchIcon />}
                     ></input>
-                    <button
-                        class="btn btn-outline-success my-2 my-sm-0"
+                    {/* <button
+                        class="btn btn-outline-success my-2 my-sm-0 button-edit"
                         type="submit"
                     >
                         Search
-                    </button>
-                    <button
-                        className="btn btn-outline-primary"
-                        onClick={() => {
-                            <Login />;
-                        }}
-                    >
-                        LogIn
-                    </button>
-                    <button className="btn btn-outline-danger" onClick={logout}>
-                        LogOut
-                    </button>
+                    </button> */}
+                    <LoginButton />
+
                 </form>
             </div>
         </nav>

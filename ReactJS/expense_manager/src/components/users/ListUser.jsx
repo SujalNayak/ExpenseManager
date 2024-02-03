@@ -27,7 +27,6 @@ export const ListUser = () => {
         <table class="table table-striped table-hover table-bordered border-primary table-responsive-md text-center">
     <thead>
         <tr>
-            <th scope="col">Id</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
@@ -40,14 +39,13 @@ export const ListUser = () => {
     <tbody>
         {users.map((user, index) => (
         <tr key={index}>
-            {/* <td>{user.id}</td> */}
             <td>{user.fname}</td>
             <td>{user.lname}</td>
             <td>{user.email}</td>
             <td>{user.mobile_no}</td>
             <td>{user.status}</td>
             <td>
-                <Button id='button-edit' variant="outlined" color="primary" onClick={updateUser}>Update</Button>
+                    <Button id='button-edit' variant="outlined" color="primary" onClick={updateUser}>Update</Button>
                 <Button variant="outlined" color="error" onClick={deleteUser}>Delete</Button>
             </td>
         </tr>
