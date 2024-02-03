@@ -20,14 +20,16 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Login/>}></Route>
-        <Route element={<ProtectedRoutes/>}>
         <Route path="/AddUser" element={<AddUser/>}></Route>
+        <Route path='/WdywUser' element={<WdywUser/>}></Route>
+        <Route element={<ProtectedRoutes/>}>
+        
         <Route path='/WdywExpense' element={<WdywExpense/>}></Route>
         <Route path='/AddExpenseCat' element={<AddExpenseCat/>}></Route>
         <Route path='/AddExpenses' element={<AddExpenses/>}></Route>
         <Route path='/ListUser' element={<ListUser/>}></Route>
         <Route path='/ListExpenses' element={<ListExpenses/>}></Route>
-        <Route path='/WdywUser' element={<WdywUser/>}></Route>
+        
         <Route path='/PieChart' element={<PieChart/>}></Route>
         </Route>
       </Routes>

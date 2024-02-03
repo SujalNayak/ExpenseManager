@@ -21,7 +21,14 @@ export const Login = () => {
       // localStorage.setItem('user', res.data.user);
       const user = localStorage.getItem('user');
       const token = localStorage.getItem('token');
-     console.log(token);
+      console.log(token);
+        var tokenObj ={
+          token: token,
+          
+        }
+      const res1 = await axios.post("http://localhost:3002/user/user/token",tokenObj);
+      console.log("from token..",res1.data);
+      localStorage.setItem("id",res.data?.data?._id)
 
      console.log("Login Successful");
      toast.success('Logged In Successfully!', {

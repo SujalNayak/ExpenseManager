@@ -24,12 +24,12 @@ export const AddExpenses = () => {
   const submitHandler = async (data) => {
       const formData = new FormData();
 
-      formData.append("name", data.name);
-      formData.append("status", data.status);
-      formData.append("expense", selectedExpense);
+const expObj = Object.assign(data,{User_id:localStorage.getItem("id")});
+     
       const res = await axios.post(
         "http://localhost:3002/expenseSubCat/expenseSubCat", 
-        formData, 
+        expObj
+        , 
         {
           headers: {
             'Authorization': "Bearer " + localStorage.getItem("token")

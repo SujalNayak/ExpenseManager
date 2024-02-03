@@ -75,7 +75,7 @@ const getUserByToken = async (req, res) => {
     try {
         // Validate and decode the token
         const decoded = tokenutil.validateToken(token);
-        console.log(decoded);
+    console.log(decoded);
         // Find the user by id
         const user = await userSchema.findById(decoded._id);
         console.log(user);
