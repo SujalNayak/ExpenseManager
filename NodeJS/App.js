@@ -3,6 +3,7 @@ const mongoose= require("mongoose");
 const cors = require("cors");
 const app = express();
 const PORT = 3002;
+// app.use(cors());
 app.use(cors());
 app.use(express.json());
 
@@ -21,10 +22,6 @@ mongoose.connect("mongodb://127.0.0.1:27017/ExpenseManager", {
 }).catch((err)=>{
     console.log("error..",err);
 })
-
-app.get("/", (req, res) => {
-  res.send("app is working..");
-});
 
 
 app.listen(PORT, () => {
