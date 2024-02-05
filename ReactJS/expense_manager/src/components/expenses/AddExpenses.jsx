@@ -22,7 +22,7 @@ export const AddExpenses = () => {
   const [expenses, setExpenses] = React.useState([]);
   const [selectedExpense, setSelectedExpense] = React.useState("");
   const submitHandler = async (data) => {
-      const formData = new FormData();
+      
 
 const expObj = Object.assign(data,{User_id:localStorage.getItem("id")});
      

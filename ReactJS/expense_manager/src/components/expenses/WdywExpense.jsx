@@ -11,7 +11,7 @@ export const WdywExpense = () => {
     navigate('/ListExpenses');
   }
   const AddExpensesCatagory= ()=>{
-    navigate('/AddExpensesCat');
+    navigate('/AddExpenseCat');
   }
   return (
     <div>

@@ -24,7 +24,7 @@ export const Navbar = (props) => {
                 return (
                     <button
                         className="btn btn-outline-primary"
-                        onClick={() => {
+                        onClick={(to="/Login") => {
                             <Login />;
                         }}
                     >
