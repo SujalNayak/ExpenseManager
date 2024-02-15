@@ -63,8 +63,7 @@ export const ListExpenses = () => {
             <td>{expense.name}</td>
             <td>
                 {/* <Grid key={index} value={expenses._id}>{expenses.name}</Grid> */}
-                <Grid>{loadExpenseCat()}
-                </Grid>
+                <Grid>{loadExpenseCat()}</Grid>
             </td>
             <td>{expense.status}</td>
            <td>
