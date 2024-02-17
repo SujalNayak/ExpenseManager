@@ -1,11 +1,11 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 #textfield{
     width: 100px;
     height: 40px;
-    border-radius: 5px;
+    border-radius: 5px; 
     border: 1px solid #ccc;
     padding: 5px;
     margin-bottom: 10px;

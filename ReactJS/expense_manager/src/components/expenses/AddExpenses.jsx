@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import NumberInput from "material-ui-number-input";
 
 
 import {
@@ -85,7 +86,13 @@ useEffect(() => {
       />
       <br />
       <br />
-      <FormControl>
+      <NumberInput
+        aria-label="Demo number input"
+        placeholder="Enter ammount…"
+        value={value}
+        onChange={(event, val) => setValue(val)}
+      />
+      {/* <FormControl>
         <FormLabel id="demo-controlled-radio-buttons-group">Status</FormLabel>
         <RadioGroup
           aria-labelledby="demo-controlled-radio-buttons-group"
@@ -99,9 +106,9 @@ useEffect(() => {
             value="Inactive"
             control={<Radio />}
             label="Inactive"
-          />
-        </RadioGroup>
-      </FormControl>
+          /> */}
+        {/* </RadioGroup> */}
+      {/* </FormControl> */}
       <br />
       <br />
       <Button

@@ -7,23 +7,35 @@ import { Button, Grid } from '@mui/material';
 
 export const ListExpenses = () => {
     const [expenses, setExpenses] = useState([]);
-    const id = localStorage.getItem("id");
+    // alert(id);
     const loadExpenses = async() => {
+        const id = localStorage.getItem("id");
+        try{
+        if(id !== undefined || id!= null ) {
+
+
         const res = await axios.get(`http://localhost:3002/expenseSubCat/expenseSubCat/${id}`);
-        console.log(res.data.data);
+        // console.log(res.data.data);
+        console.log(res.data);
         setExpenses(res.data.data);
+        }
+    }catch(err){
+        console.log(err);
     }
-    const deleteExpense = async id => {
+    }
+    const deleteExpense = async () => {
+        const id = localStorage.getItem("id");
         await axios.delete(`http://localhost:3002/expenseSubCat/expenseSubCat/${id}`);
         loadExpenses();
     }
-    const updateExpense = async id => {
+    const updateExpense = async () => {
+        const id = localStorage.getItem("id");
         await axios.put(`http://localhost:3002/expenseSubCat/expenseSubCat/${id}`);
         loadExpenses();
     }
     useEffect(() => {
         loadExpenses();
-        loadExpenseCat();
+        // loadExpenseCat();
     }, []);
 
     const loadExpenseCat = async id => {
@@ -52,19 +64,15 @@ export const ListExpenses = () => {
     <thead>
         <tr>
             <th scope="col">Expense</th>
-            <th scope="col">Expense Catagory</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
-        {expenses.map((expense, index) => (
+        {expenses?.map((expense, index) => (
         <tr key={index}>
             <td>{expense.name}</td>
-            <td>
-                {/* <Grid key={index} value={expenses._id}>{expenses.name}</Grid> */}
-                <Grid>{loadExpenseCat()}</Grid>
-            </td>
+            
             <td>{expense.status}</td>
            <td>
                 <Button id='button-edit' variant="outlined" color="primary" onClick={updateExpense}>Update</Button>
