@@ -5,6 +5,8 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+//import index.css
+import "../../index.css";
 
 export const Login = () => {
     const { register, handleSubmit } = useForm();
@@ -51,8 +53,8 @@ export const Login = () => {
         }
     };
     return (
-        <div>
-            <h2>Login</h2>
+        <div className="my-5 border-solid border-5 border-sky-500">
+            {/* <h1 className="mb-0.5 mt-0.5">Login</h1> */}
             <TextField
                 id="outlined-basic"
                 label="E-mail"

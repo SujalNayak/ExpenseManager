@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import NumberInput from "material-ui-number-input";
+// import NumberInput from "material-ui-number-input";
+// import { StyledInputRoot, StyledInputElement, StyledButton } from "material-ui-number-input";
+
 
 
 import {
@@ -16,6 +18,8 @@ import {
   RadioGroup,
   Select,
   TextField,
+  CustomButton,
+  BaseNumberInput,
 } from "@mui/material";
 
 export const AddExpenses = () => {
@@ -86,29 +90,12 @@ useEffect(() => {
       />
       <br />
       <br />
-      <NumberInput
-        aria-label="Demo number input"
-        placeholder="Enter ammount…"
-        value={value}
-        onChange={(event, val) => setValue(val)}
+      <TextField
+        id="outlined-basic"
+        label="Ammount"
+        variant="outlined"
+        {...register("ammount")}
       />
-      {/* <FormControl>
-        <FormLabel id="demo-controlled-radio-buttons-group">Status</FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-controlled-radio-buttons-group"
-          name="controlled-radio-buttons-group"
-          value={value}
-          onChange={handleChange}
-          {...register("status")}
-        >
-          <FormControlLabel value="Active" control={<Radio />} label="Active" />
-          <FormControlLabel
-            value="Inactive"
-            control={<Radio />}
-            label="Inactive"
-          /> */}
-        {/* </RadioGroup> */}
-      {/* </FormControl> */}
       <br />
       <br />
       <Button

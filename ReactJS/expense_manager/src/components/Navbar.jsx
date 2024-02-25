@@ -82,6 +82,11 @@ export const Navbar = (props) => {
                                 Chart
                             </Link>
                         </li>
+                        <li className="nav-item active">
+                            <Link className="nav-link" to="/RatingDemo">
+                                Rating
+                            </Link>
+                        </li>
                     </ul>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
